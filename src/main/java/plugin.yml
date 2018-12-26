@@ -1,0 +1,18 @@
+name: WarpDoor
+version: 1.0
+description: WarpDoor
+author: Be4rJP
+main: be4r.warpdoor.Main
+api-version: 1.13
+
+commands:
+  wd:
+    description: OpenPonitGUI
+    permission: warpdoor.wd
+    usage: /<command>
+    
+    
+permissions:
+  warpdoor.wd:
+    description: OpenGUI
+    default: true
