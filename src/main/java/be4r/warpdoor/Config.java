@@ -25,7 +25,7 @@ public class Config {
     
     public synchronized void SaveConfig(){
         try{
-        config.save(new File("plugins/MovePoint", "points.yml"));
+        config.save(new File("plugins/WarpDoor", "points.yml"));
         }catch(Exception e){
         }
     }
