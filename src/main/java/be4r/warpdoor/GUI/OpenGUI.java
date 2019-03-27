@@ -1,10 +1,13 @@
 package be4r.warpdoor.GUI;
 
+import be4r.warpdoor.Glow;
 import static be4r.warpdoor.Main.conf;
 
 import static be4r.warpdoor.Main.PlayerData;
+import static be4r.warpdoor.Main.glow;
 import java.util.ArrayList;
 import java.util.List;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Instrument;
 import org.bukkit.Material;
@@ -39,15 +42,15 @@ public class OpenGUI {
             itemm.setLore(lores);
             item.setItemMeta(itemm);
             slotnum++;
-            if (slotnum <= 44){
+            if (slotnum <= 53){
                 inv.setItem(slotnum, item);
-                if (slotnum == 44){
+                if (slotnum == 53){
                     fulled = true;
                 }
             }
         }
         
-        
+        /*
         ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta bookm = book.getItemMeta();
         bookm.setDisplayName("§c§aポイント名を変更");
@@ -59,21 +62,35 @@ public class OpenGUI {
         delm.setDisplayName("§c§nポイントを削除");
         del.setItemMeta(delm);
         inv.setItem(53, del);
-        
+        */
         p.playNote(p.getLocation(), Instrument.STICKS, Note.flat(1, Note.Tone.C));
         p.openInventory(inv);
+        
     }
     
-    public void AddPoint(Player p){
-        if (fulled != true){
-            Inventory inv = Bukkit.createInventory(p, InventoryType.ANVIL);
-            ItemStack item = new ItemStack(Material.ENDER_EYE);
-            ItemMeta itemm = item.getItemMeta();
-            itemm.setDisplayName("ポイント名を入力してください");
-            item.setItemMeta(itemm);
-            inv.setItem(0, item);
-            p.openInventory(inv);
-        }
+    public void DoorMenu(Player p, String listname){
+        Inventory inv = Bukkit.createInventory(null, 27, listname);
+        
+        ItemStack book = new ItemStack(Material.BOOK);
+        ItemMeta bookm = book.getItemMeta();
+        bookm.setDisplayName("§a§nポイント名を変更");
+        book.setItemMeta(bookm);
+        
+        ItemStack del = new ItemStack(Material.BARRIER);
+        ItemMeta delm = del.getItemMeta();
+        delm.setDisplayName("§c§nポイントを削除");
+        del.setItemMeta(delm);
+        
+        new Glow().enchantGlow(book);
+        new Glow().enchantGlow(del);
+        
+        book.addEnchantment(glow, 1);
+        del.addEnchantment(glow, 1);
+        
+        inv.setItem(11, book);
+        inv.setItem(15, del);
+        
+        p.openInventory(inv);
     }
     
     

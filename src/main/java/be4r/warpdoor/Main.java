@@ -38,7 +38,6 @@ public class Main extends JavaPlugin implements CommandExecutor, Listener {
     public void onEnable() {
         Main.instance = this;
         getCommand("wd").setExecutor(this);
-        getLogger().info("");
         conf.LoadConfig();
         getServer().getPluginManager().registerEvents(new ClickItems(), this);
         getServer().getPluginManager().registerEvents(new Door(), this);

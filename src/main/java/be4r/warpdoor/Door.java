@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -66,6 +67,25 @@ public class Door  implements Listener{
             if((b1.getType() == Material.IRON_DOOR) || (b2.getType() == Material.IRON_DOOR) || (b3.getType() == Material.IRON_DOOR) || (b4.getType() == Material.IRON_DOOR)){
             }else{
                 e.setCancelled(true);
+            }
+        }
+    }
+    
+    @EventHandler
+    public void DoorBreak(BlockBreakEvent e){
+        if (e.getBlock().getBlockData().getMaterial().equals(Material.IRON_DOOR)){
+            Location bbl = e.getBlock().getLocation();
+            Player p = e.getPlayer();
+            for (String PointName : conf.getConfig().getConfigurationSection("Points").getKeys(false)){
+                String WorldName = conf.getConfig().getString("Points." + PointName + ".WorldName");
+                World w = getServer().getWorld(WorldName);
+                int x = conf.getConfig().getInt("Points." + PointName + ".X");
+                int y = conf.getConfig().getInt("Points." + PointName + ".Y");
+                int z = conf.getConfig().getInt("Points." + PointName + ".Z");
+                Location bl = new Location(w, x, y, z);
+                if (bbl.getBlockX() == bl.getBlockX() && bbl.getBlockZ() == bl.getBlockZ()){
+                    e.setCancelled(true);
+                }
             }
         }
     }
