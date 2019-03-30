@@ -178,7 +178,9 @@ public class ClickItems implements Listener{
                 int z = conf.getConfig().getInt("Points." + PointName + ".Z");
                 Location bl = new Location(w, x, y, z);
                 if (cbl.getBlockX() == bl.getBlockX() && cbl.getBlockZ() == bl.getBlockZ()){
-                    new OpenGUI().DoorMenu(p, PointName);
+                    if(cbl.getBlockY() == bl.getBlockY() || cbl.getBlockY() == bl.getBlockY() + 1.0D){
+                        new OpenGUI().DoorMenu(p, PointName);
+                    }
                 }
             }
         }
